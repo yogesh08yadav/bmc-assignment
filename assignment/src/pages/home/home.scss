@@ -1,23 +1,21 @@
+@import "../../styles/globalMixins.scss";
 .content {
   width: 100%;
   height: 100%;
-  //   display: flex;
   background-color: #f2f3f3;
 
   .header {
     width: 100%;
-    height: 70%;
+    height: 50%;
   }
 
   .stories {
-    // background-color: bisque;
     width: 90%;
     margin: auto;
     display: flex;
-    height: 100vh;
+    height: 40%;
 
     .filters {
-      // background: aqua;
       flex: 1;
       padding: 10px;
       font-size: 20px;
@@ -65,77 +63,65 @@
           letter-spacing: 2px;
         }
       }
+      .customer-story {
+        margin-top: 30px;
+      }
 
       .customer-cards {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
       }
+      .customer-cards-mobile {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+        justify-content: center;
+      }
     }
   }
 
-  //   .left {
-  //     width: 100%;
-  //     height: 100%;
-  //     padding: 40px 20px;
+  .pagination-btn {
+    @include d-flex-items-center-content-center;
+    margin-top: 30px;
+    gap: 10px;
+    flex-direction: column;
+    height: 100px;
 
-  //     h1 {
-  //       margin-bottom: 30px;
-  //       line-height: 60px;
-  //       font-weight: 900;
-  //       font-size: 40px;
-  //     }
-  //     span {
-  //       color: #405aaa;
-  //     }
-  //     p {
-  //       margin-bottom: 30px;
-  //     }
-  //     button {
-  //       font-size: 20px;
-  //       padding: 10px 25px;
-  //       background-color: #405aaa;
-  //       border: none;
-  //       outline: none;
-  //       font-weight: 600;
-  //       border-radius: 4px;
-  //       color: whitesmoke;
-  //       letter-spacing: 4px;
-  //     }
-  //   }
-
-  //   .right {
-  //     width: 100%;
-  //     height: 100%;
-
-  //     img {
-  //         width: 100%;
-  //         height: 100%;
-  //       }
-  //   }
+    p {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    button {
+      @include d-flex-items-center-content-center;
+      gap: 10px;
+      color: whitesmoke;
+      background-color: #0058ca;
+      height: 70px;
+      width: 195px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 30px;
+      border-radius: 5px;
+      font-size: 21px;
+    }
+  }
 }
 
 @media (max-width: 960px) {
-  .options ul {
-    display: none;
+  // .options ul {
+  //   display: none;
+  // }
+  // .customer-cards {
+  // background-color: aqua;
+  // display: grid;
+  // grid-template-columns: repeat(1, 1fr);
+  // display: flex;
+  // flex-direction: column;
+  // flex-wrap: wrap;
+  // }
+  .stories {
+    flex-direction: column;
   }
-  //   .navbar {
-  //     background-color: aquamarine;
-  //     color: whitesmoke;
-  //   }
-  //   .options span {
-  //     display: block;
-  //   }
-  //   .content {
-  //     flex-direction: column;
-  //   }
-  //   .left {
-  //     width: 100%;
-  //   }
-  //   .right {
-  //     width: 100%;
-  //   }
-  //   .left h1 {
-  //     font-size: 30px;
-  //   }
 }

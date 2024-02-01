@@ -1,30 +1,39 @@
 import React from "react";
 import "./customerCard.scss";
+import { SlArrowRight } from "react-icons/sl";
 
-const CustomerCard = () => {
+const CustomerCard = ({ card }) => {
   return (
-    <div className="customerCard">
-      <div className="image">
-        <img
-          src="https://www.bmc.com/content/dam/bmc/logos/third-party/logo-evolution-color.png"
-          alt="company-logo"
-        />
-      </div>
-      <div className="left">
-        <div className="card-header">
-          <h3>CUSTOMER STORY</h3>
+    <a href={card.assetLink} style={{ textDecoration: "none" }}>
+      <div className="customerCard">
+        <div className="image">
+          <img
+            height={"100%"}
+            width={"75%"}
+            src={`https://www.bmc.com${card.headerImage}`}
+            alt="company-logo"
+          />
         </div>
-        <div className="card-content">
-          <hr />
-          {/* <h1>Tech Mahindra</h1> */}
-          <p>
-            Hermes Streamlines Asset Management and Automates Business Processes
-            with BMC Helix Solutions
-          </p>
+        <div className="left">
+          <div className="card-header">
+            <h3>CUSTOMER STORY</h3>
+          </div>
+          <div className="card-content">
+            <hr />
+            {/* <h1>Tech Mahindra</h1> */}
+            <p>{card.description}</p>
+          </div>
         </div>
-        <hr style={{ backgroundColor: "#0058ac" }} />
+
+        <div className="footer">
+          <hr style={{ background: "#0058ac" }} />
+          <div className="icons">
+            <h2>VIEW</h2>
+            <SlArrowRight fontSize={20} fontWeight={700} />
+          </div>
+        </div>
       </div>
-    </div>
+    </a>
   );
 };
 

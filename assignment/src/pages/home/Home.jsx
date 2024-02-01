@@ -2,19 +2,22 @@ import React, { useEffect, useState } from "react";
 import "./home.scss";
 import homeImage from "../../images/bmc-home-page.png";
 import homeImageRight from "../../images/bmc-home-page-right.png";
-import axios from "axios";
 import FeaturedCard from "../../components/featuredCard/FeaturedCard";
 import CustomerCard from "../../components/customerCard/CustomerCard";
+import { IoIosArrowDown } from "react-icons/io";
 
 const Home = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth);
   const [loading, setLoading] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
+  const [cardsData, setCardData] = useState([]);
+  const [pageCount, setPageCount] = useState(1);
+  let pageSize = 9;
   const fetchData = async () => {
     setLoading(true);
-    await fetch("/api/content")
-      .then((res) => console.log("res1", res))
-      // .then((res) => console.log("res", res))
+    await fetch("http://localhost:3001/api/content")
+      .then((res) => res.json())
+      .then((res) => setCardData(res.results))
       .catch((err) => console.log("err", err))
       .finally(() => setLoading(false));
   };
@@ -63,18 +66,36 @@ const Home = () => {
         <div className="story">
           <div className="selected-filter">Select your filter on the left</div>
           <div className="featured-story">
-            <h2>Featured Stories</h2>
+            <h1>Featured Stories</h1>
             <FeaturedCard />
           </div>
           <div className="customer-story">
-            <h2>All customer stories</h2>
-            <div className="customer-cards">
-              <CustomerCard />
-              <CustomerCard />
-              <CustomerCard />
+            <h1>All customer stories</h1>
+            <div
+              className={
+                isMobile < "1200" ? "customer-cards-mobile" : "customer-cards"
+              }
+            >
+              {cardsData.length > 0 &&
+                cardsData
+                  .slice(0, pageCount * pageSize)
+                  .map((card, idx) => <CustomerCard card={card} />)}
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="pagination-btn">
+        <p>{`Showing ${
+          pageCount * pageSize > 78 ? 78 : pageCount * pageSize
+        } of 78`}</p>
+        <button
+          disabled={pageCount > cardsData.length / 9}
+          onClick={() => setPageCount((prev) => prev + 1)}
+        >
+          Load more
+          <IoIosArrowDown />
+        </button>
       </div>
     </div>
   );
